@@ -21,10 +21,7 @@ const actionClient = new ROSLIB.ActionClient({
 });
 
 
-
 app.use(express.json());
-
-
 
 
 let client;
