@@ -1,5 +1,6 @@
 process.loadEnvFile('../config/.env');
 const db = require('../config/db.js');
+const fetchedPoses = require('../utilities/pose.js');
 
 const missionsCollection = db.collection(process.env.MISSION_COLLECTION_NAME);
 
@@ -26,8 +27,8 @@ const activateMission = async (req, res) => {
         console.log(`Recieved Mission Id Successfully`);
         try {
             const activeMissionArray = await missionsCollection.find({ "_id": new OBjectId(missionId) }).toArray();
-            const posees = activeMissionArray[0].queueData.queue;
-            
+            const poseIds = activeMissionArray[0].queueData.queue;
+            const poses = fetchedPoses(poseIds);
         } catch (err) {
             res.status(500).json({error : `Error fetching poses for the mission ID`});
         }
