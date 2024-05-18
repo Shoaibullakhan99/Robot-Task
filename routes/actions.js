@@ -29,6 +29,7 @@ const activateMission = async (req, res) => {
             const activeMissionArray = await missionsCollection.find({ "_id": new OBjectId(missionId) }).toArray();
             const poseIds = activeMissionArray[0].queueData.queue;
             const poses = fetchedPoses(poseIds);
+            
         } catch (err) {
             res.status(500).json({error : `Error fetching poses for the mission ID`});
         }
